@@ -1,0 +1,21 @@
+:global(nav.navbar) {
+    background-color: transparent;
+}
+
+:global .navbar-brand {
+    padding-left: 4.25rem;
+    display: flex;
+    align-items: center;
+}
+
+:global .navbar-brand a.navbar-item {
+    font-size: 2rem;
+}
+
+:global .navbar-item:last-of-type {
+    padding-right: 5.25rem;
+}
+
+:global .navbar-burger.burger {
+    margin-right: 15px;
+}

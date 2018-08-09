@@ -1,0 +1,12 @@
+:global section.section {
+    padding: 1.5rem 1.5rem;
+    background-color: transparent;
+}
+
+#wrapper {
+    background-color: mintcream;
+}
+
+:global body {
+    transform: translateZ(0);
+}
