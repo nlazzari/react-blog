@@ -11,61 +11,68 @@ const firstRowPosts = posts.slice(1, 4);
 const secondRowPosts = posts.slice(4, 7);
 const remainingPosts = posts.slice(7);
 
+const titleToKey = (title) => {
+    const charArray = title.split(' ');
+    const length = charArray.length;
+    return `${charArray.join('')}${length}`;
+};
+
 export default function Home() {
-   
-    return ( <React.Fragment>
-{ featurePost ?
-    (<section class={classnames('section', styles.section)}>
-        <div class="container">
-            <PostSummary
-                title={featurePost.title}
-                subtitle={featurePost.subtitle}
-                image={featurePost.image}
-                isFeature
-            />
-        </div>
-    </section>) : null}
-<section class="section">
-  <div class="container">
-    <div class="columns">
-        { firstRowPosts.map((post) => (
-            <div class="column">
+
+    return (<React.Fragment>
+        {featurePost ?
+            (<section className={classnames('section', styles.section)}>
+                <div className="container" key={`post-key-${titleToKey(featurePost.title)}`}>
                     <PostSummary
+                        title={featurePost.title}
+                        subtitle={featurePost.subtitle}
+                        image={featurePost.image}
+                        isFeature
+                    />
+                </div>
+            </section>) : null}
+        <section className="section">
+            <div className="container">
+                <div className="columns">
+                    {firstRowPosts.map((post) => (
+                        <div className="column" key={`post-key-${titleToKey(post.title)}`}>
+                            <PostSummary
+                                title={post.title}
+                                subtitle={post.subtitle}
+                                image={post.image}
+                            />
+                        </div>))
+                    }
+                </div>
+            </div>
+        </section>
+        <section className="section">
+            <div className="container">
+                <div className="columns">
+                    {secondRowPosts.map((post) => (
+                        <div className="column" key={`post-key-${titleToKey(post.title)}`}>
+                            <PostSummary
+                                title={post.title}
+                                subtitle={post.subtitle}
+                                image={post.image}
+                            />
+                        </div>))
+                    }
+                </div>
+            </div>
+        </section>
+        <section className="section">
+            <div className="container">
+                {remainingPosts.map((post) => (
+                    <PostSummary
+                        key={`post-key-${titleToKey(post.title)}`}
                         title={post.title}
                         subtitle={post.subtitle}
                         image={post.image}
-                    />
-            </div>))
-        }
-    </div>
-  </div>
-</section>
-<section class="section">
-    <div class="container">
-        <div class="columns">
-            { secondRowPosts.map((post) => (
-                <div class="column">
-                        <PostSummary
-                            title={post.title}
-                            subtitle={post.subtitle}
-                            image={post.image}
-                        />
-                </div>))
-            }
-        </div>
-    </div>
-</section>
-<section class="section">
-  <div class="container">
-    { remainingPosts.map((post) => (
-       <PostSummary
-       title={post.title}
-       subtitle={post.subtitle}
-       image={post.image}
-   />))
-    }
-  </div>
-</section>
-</React.Fragment>
+                    />))
+                }
+            </div>
+        </section>
+    </React.Fragment>
     );
 }

@@ -12,7 +12,13 @@ const App = () => (
     </header>
 
     <main>
-      {routes.map((route) => (<Route exact path={route.path} component={route.component} />))}
+      {routes.map((route) => (
+        <Route
+          exact
+          key={`app-key-${route.component}${route.path}`}
+          path={route.path}
+          component={route.component}
+        />))}
     </main>
   </div>
 );

@@ -24,8 +24,10 @@ export default function PostSummary({title, subtitle, image, isFeature}) {
             </p>
         </div>
     </div>
-    <img class={classnames(styles.background)}
-         style={imageStyles} />
+    <img className={classnames(styles.background)}
+         style={imageStyles}
+         alt=''     
+    />
 </article>
     );
 }
