@@ -6,6 +6,7 @@
     height: 40vh;
     background-color: white;
     transition: 0.2s transform ease;
+    will-change: transform, box-shadow, z-index;
 }
 
 .postSummary:hover,
