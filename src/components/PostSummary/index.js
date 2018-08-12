@@ -12,7 +12,7 @@ export default function PostSummary({title, subtitle, image, isFeature}) {
 <article className={classnames('card', styles.postSummary, featureClass)} >
     <div className={classnames('card-content', styles.cardContent)}>
         <div className={classnames(styles.titleContainer)}>
-            <p className={classnames(styles.title, 'title')}>
+            <p className={classnames('title', styles.title)}>
                 <span>
                     {title}
                 </span>
@@ -31,3 +31,10 @@ export default function PostSummary({title, subtitle, image, isFeature}) {
 </article>
     );
 }
+
+PostSummary.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+    image: PropTypes.string,
+    isFeature: PropTypes.bool,
+};

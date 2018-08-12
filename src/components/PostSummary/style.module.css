@@ -5,8 +5,9 @@
 .postSummary {
     height: 40vh;
     background-color: white;
+    transform: none;
     transition: 0.2s transform ease;
-    will-change: transform, box-shadow, z-index;
+    will-change: transform, box-shadow, z-index, background-color;
 }
 
 .postSummary:hover,
@@ -35,11 +36,11 @@
     width: 100%;
     height: 100%;
     transition: 0.20s filter ease;
+    will-change: filter;
 }
 
 .cardContent {
     background-color: rgba(255,255,255,0);
-    /*overflow: hidden;*/
     text-align: left;
     color: white;
     width: 100%;
@@ -59,7 +60,8 @@ p.title, p.subtitle {
     display: table;
     background-color: rgba(38, 38, 124, 0.3);
     padding: 10px;
-    transition: 0.25s background-color ease-in-out;
+    transition: 0.2s background-color ease-in-out;
+    will-change: background-color;
 }
 
 article:nth-of-type(7) {
