@@ -1,5 +1,7 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux-immutable';
+
+import HomeReducer from './containers/Home/reducer';
 
 export default combineReducers({
-  // some (key, reducer) pairs go here
+  Home: HomeReducer,
 });
