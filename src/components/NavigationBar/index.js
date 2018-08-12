@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+// import PropTypes from 'prop-types';
 import {
     Navbar,
     NavbarBrand,
@@ -9,7 +9,7 @@ import {
     NavbarEnd,
 } from 'bloomer';
 import { Link } from 'react-router-dom';
-// import styles from './style.module.css';
+import './style.css';
 
 export default class NavigationBar extends React.Component {
     constructor(props) {
