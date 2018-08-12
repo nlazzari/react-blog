@@ -1,6 +1,6 @@
 # React-Blog
 
-Simple, yet elegant, blog made using React.js.
+Simple, yet elegant, blog made using React.js. [Demo](http://nlazzari-react-blog.surge.sh/)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
