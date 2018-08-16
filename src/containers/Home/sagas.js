@@ -6,7 +6,7 @@ import { fetchPostsSuccess, fetchPostsFailure } from './actions';
 
 export function* fetchPostsSaga() {
     yield takeEvery(FETCH_POSTS_REQUEST, function* fetchPosts() {
-        const results = yield call(Api.get, ['/posts']);
+        const results = yield call(Api.get, ['/posts/summaries']);
 
         if (results.data) {
             const posts = results.data;
