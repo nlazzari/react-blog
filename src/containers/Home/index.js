@@ -11,21 +11,33 @@ import classnames from 'classnames';
 import styles from './styles.module.css';
 
 
-const titleToKey = (title) => {
-    const charArray = title.split(' ');
-    const length = charArray.length;
-    return `${charArray.join('')}${length}`;
-};
-
 class Home extends React.Component {
     constructor(props) {
         super(props);
+        this.gridRow = this.gridRow.bind(this);
         this.organizePostsByType = this.organizePostsByType.bind(this);
+        this.postSummary = this.postSummary.bind(this);
     }
 
     componentDidMount() {
         const { fetchPosts } = this.props;
         fetchPosts();
+    }
+
+    gridRow(posts) {
+        return (
+            <section className="section">
+                <div className="container">
+                    <div className="columns">
+                        {posts.map((post) => (
+                            <div className="column" key={`post-key-${post.id}`}>
+                                {this.postSummary(post)}
+                            </div>))
+                        }
+                    </div>
+                </div>
+            </section>
+        );
     }
 
     organizePostsByType(posts) {
@@ -49,6 +61,22 @@ class Home extends React.Component {
         return postsByType;
     }
 
+    postSummary(post, isFeature = false) {
+        const { id, title, subtitle, image, slug, author, created_at } = post;
+        return (
+            <PostSummary
+                id={id}
+                title={title}
+                subtitle={subtitle}
+                image={image}
+                slug={slug}
+                author={author}
+                createdAt={created_at}
+                isFeature={isFeature}
+            />
+        );
+    }
+
     render() {
         const { posts } = this.props;
         const {
@@ -61,55 +89,15 @@ class Home extends React.Component {
         return (<React.Fragment>
             {featurePost ?
                 (<section className={classnames('section', styles.section)}>
-                    <div className="container" key={`post-key-${titleToKey(featurePost.title)}`}>
-                        <PostSummary
-                            title={featurePost.title}
-                            subtitle={featurePost.subtitle}
-                            image={featurePost.image}
-                            isFeature
-                        />
+                    <div className="container" key={`post-key-${featurePost.id}`}>
+                        { this.postSummary(featurePost, true) }
                     </div>
                 </section>) : null}
+            { this.gridRow(firstRowPosts) }
+            { this.gridRow(secondRowPosts) }
             <section className="section">
                 <div className="container">
-                    <div className="columns">
-                        {firstRowPosts.map((post) => (
-                            <div className="column" key={`post-key-${titleToKey(post.title)}`}>
-                                <PostSummary
-                                    title={post.title}
-                                    subtitle={post.subtitle}
-                                    image={post.image}
-                                />
-                            </div>))
-                        }
-                    </div>
-                </div>
-            </section>
-            <section className="section">
-                <div className="container">
-                    <div className="columns">
-                        {secondRowPosts.map((post) => (
-                            <div className="column" key={`post-key-${titleToKey(post.title)}`}>
-                                <PostSummary
-                                    title={post.title}
-                                    subtitle={post.subtitle}
-                                    image={post.image}
-                                />
-                            </div>))
-                        }
-                    </div>
-                </div>
-            </section>
-            <section className="section">
-                <div className="container">
-                    {remainingPosts.map((post) => (
-                        <PostSummary
-                            key={`post-key-${titleToKey(post.title)}`}
-                            title={post.title}
-                            subtitle={post.subtitle}
-                            image={post.image}
-                        />))
-                    }
+                    {remainingPosts.map((post) => (this.postSummary(post)))}
                 </div>
             </section>
         </React.Fragment>
