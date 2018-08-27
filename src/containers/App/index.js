@@ -1,25 +1,33 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import NavigationBar from '../../components/NavigationBar';
-import { routes } from '../../routes';
+import Home from '../Home';
+import Post from '../Post';
 
+class App extends React.Component {
+  render() {
+    return (
+    <div>
+      <header>
+        <NavigationBar/>
+      </header>
 
-const App = () => (
-  <div>
-    <header>
-      <NavigationBar />
-    </header>
+      <main>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/post' render={({ match }) => {
+            return (
+              <Switch>
+                <Route path={`${match.path}/:id/:slug`} component={Post} />
+                <Route path={`${match.path}/:id`} component={Post} />
+              </Switch>
+            );
+          }} />
+        </Switch>
+      </main>
+    </div>);
+  }
+}
 
-    <main>
-      {routes.map((route) => (
-        <Route
-          exact
-          key={`app-key-${route.component}${route.path}`}
-          path={route.path}
-          component={route.component}
-        />))}
-    </main>
-  </div>
-);
 
 export default App;
