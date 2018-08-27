@@ -15,10 +15,10 @@ export default class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = { isActive: false };
-        this.onClickNav = this.onClickNav.bind(this);
+        this.handleOnClickNav = this.handleOnClickNav.bind(this);
     }
 
-    onClickNav() {
+    handleOnClickNav() {
         this.setState({
             isActive: !this.state.isActive,
         });
@@ -26,21 +26,23 @@ export default class NavigationBar extends React.Component {
 
     render() {
         return (
-    <Navbar isTransparent>
+    <Navbar isTransparent >
         <NavbarBrand>
             <NavbarItem>
-                React Blog
+                <Link to='/'>
+                    ADT
+                </Link>
             </NavbarItem>
-            <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
+            <NavbarBurger isActive={this.state.isActive} onClick={this.handleOnClickNav} />
         </NavbarBrand>
-        <NavbarMenu isActive={this.state.isActive} onClick={this.onClickNav}>
-            <NavbarEnd>
-                <NavbarItem>
-                    <Link to="/">
-                        Page
-                    </Link>
-                </NavbarItem>
-            </NavbarEnd>
+        <NavbarMenu isActive={this.state.isActive} onClick={this.handleOnClickNav}>
+        <NavbarEnd>
+            <NavbarItem>
+                <Link to="/">
+                    Page
+                </Link>
+            </NavbarItem>
+        </NavbarEnd>
         </NavbarMenu>
     </Navbar>);
     }
