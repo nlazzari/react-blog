@@ -30,7 +30,7 @@ class Home extends React.Component {
                 <div className="container">
                     <div className="columns">
                         {posts.map((post) => (
-                            <div className="column" key={`post-key-${post.id}`}>
+                            <div className="column" key={`grid-row-post-key-${post.id}`}>
                                 {this.postSummary(post)}
                             </div>))
                         }
@@ -63,6 +63,7 @@ class Home extends React.Component {
 
     postSummary(post, isFeature = false) {
         const { id, title, subtitle, image, slug, author, created_at } = post;
+        const { history } = this.props;
         return (
             <PostSummary
                 id={id}
@@ -73,6 +74,7 @@ class Home extends React.Component {
                 author={author}
                 createdAt={created_at}
                 isFeature={isFeature}
+                history={history}
             />
         );
     }
@@ -89,7 +91,7 @@ class Home extends React.Component {
         return (<React.Fragment>
             {featurePost ?
                 (<section className={classnames('section', styles.section)}>
-                    <div className="container" key={`post-key-${featurePost.id}`}>
+                    <div className="container" key={`feature-post-key-${featurePost.id}`}>
                         { this.postSummary(featurePost, true) }
                     </div>
                 </section>) : null}
@@ -97,7 +99,11 @@ class Home extends React.Component {
             { this.gridRow(secondRowPosts) }
             <section className="section">
                 <div className="container">
-                    {remainingPosts.map((post) => (this.postSummary(post)))}
+                    {remainingPosts.map((post) => (
+                       <React.Fragment key={`remaining-post-key-${post.id}`}>
+                            {this.postSummary(post)}
+                       </React.Fragment>))
+                    }
                 </div>
             </section>
         </React.Fragment>

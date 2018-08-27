@@ -1,11 +1,11 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import Api from '../../common/api';
 
-import { FETCH_POSTS_REQUEST } from './constants';
+import { FETCH_ALL_POSTS_REQUEST } from './constants';
 import { fetchPostsSuccess, fetchPostsFailure } from './actions';
 
 export function* fetchPostsSaga() {
-    yield takeEvery(FETCH_POSTS_REQUEST, function* fetchPosts() {
+    yield takeEvery(FETCH_ALL_POSTS_REQUEST, function* fetchPosts() {
         const results = yield call(Api.get, ['/posts/summaries']);
 
         if (results.data) {

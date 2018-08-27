@@ -1,9 +1,9 @@
 import { fromJS } from 'immutable';
 
 import {
-    FETCH_POSTS_REQUEST,
-    FETCH_POSTS_SUCCESS,
-    FETCH_POSTS_FAILURE,
+    FETCH_ALL_POSTS_REQUEST,
+    FETCH_ALL_POSTS_SUCCESS,
+    FETCH_ALL_POSTS_FAILURE,
 } from './constants';
 
 const initialState = fromJS({
@@ -14,17 +14,17 @@ const initialState = fromJS({
 
 function HomeReducer(state = initialState, action) {
     switch (action.type) {
-        case FETCH_POSTS_REQUEST:
+        case FETCH_ALL_POSTS_REQUEST:
             return state
                 .set('loading', true)
                 .set('error', false);
-        case FETCH_POSTS_SUCCESS: {
+        case FETCH_ALL_POSTS_SUCCESS: {
             return state
                 .set('loading', false)
                 .set('error', false)
                 .set('posts', fromJS(action.posts));
         }
-        case FETCH_POSTS_FAILURE:
+        case FETCH_ALL_POSTS_FAILURE:
             return state
                 .set('loading', false)
                 .set('error', true);
