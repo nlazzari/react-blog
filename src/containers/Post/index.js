@@ -37,6 +37,7 @@ class Post extends React.Component {
         const categoryList = categories && categories.toJS();
         return categoryList && categoryList.map((category) => (
             <CategoryIcon
+                key={`category-${category}`}
                 category={category}
                 isLink
             />

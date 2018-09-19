@@ -43,7 +43,7 @@ class Category extends React.Component {
 }
 
 Category.propTypes = {
-    posts: PropTypes.array,
+    posts: PropTypes.object,
     loading: PropTypes.bool,
     fetchPosts: PropTypes.func,
 };

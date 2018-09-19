@@ -6,7 +6,7 @@ export default function PostSummaryList({ postSummaries, history }) {
     return (
         <section className="section">
             <div className="container">
-                {postSummaries.map((post) => {
+                {postSummaries && postSummaries.map((post) => {
                     const { id, title, subtitle, image, slug, categories, author, created_at } = post || {};
                     return (<React.Fragment key={`post-summary-list-key-${post.id}`}>
                         <PostSummary

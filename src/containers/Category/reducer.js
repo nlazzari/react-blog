@@ -9,7 +9,7 @@ import {
 const initialState = fromJS({
     loading: false,
     error: false,
-    posts: [],
+    posts: null,
 });
 
 function CategoryReducer(state = initialState, action) {

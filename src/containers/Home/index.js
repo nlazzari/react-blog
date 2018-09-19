@@ -108,7 +108,7 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-    posts: PropTypes.array,
+    posts: PropTypes.object,
     loading: PropTypes.bool,
     fetchPosts: PropTypes.func,
 };
