@@ -1,7 +1,12 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3333/api/v1';
+let BASE_URL
 
+if (process.env.NODE_ENV === 'production') {
+    BASE_URL = process.env.REACT_APP_BASE_URL;
+} else {
+    BASE_URL = 'http://localhost:3333/api/v1';
+}
 
 class Api {
     constructor() {

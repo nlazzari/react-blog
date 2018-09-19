@@ -9,6 +9,7 @@ import './index.css';
 import '../node_modules/bulma/css/bulma.min.css';
 
 const target = document.querySelector('#root');
+console.log('### process.env.NODE_ENV: ', process.env.NODE_ENV);
 
 render(
   <Provider store={store}>
