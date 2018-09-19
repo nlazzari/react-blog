@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import NavigationBar from '../../components/NavigationBar';
 import Home from '../Home';
 import Post from '../Post';
+import Category from '../Category';
 
 class App extends React.Component {
   render() {
@@ -15,6 +16,11 @@ class App extends React.Component {
       <main>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route path='/category' render={({ match }) => {
+              return (
+                <Route path={`${match.path}/:category`} component={Category} />
+              );
+            }} />
           <Route path='/post' render={({ match }) => {
             return (
               <Switch>

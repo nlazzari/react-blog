@@ -9,16 +9,19 @@ import {
     selectSubtitle,
     selectBody,
     selectImage,
+    selectCategories,
     selectAuthor,
     selectCreatedAt,
 } from './selectors';
+import CategoryIcon from '../../components/CategoryIcon';
 import moment from 'moment';
-// import classnames from 'classnames';
+import ReactMarkdown from 'react-markdown';
 import styles from './style.module.css';
 
 class Post extends React.Component {
     constructor(props) {
         super(props);
+        this.categoryList = this.categoryList.bind(this);
         this.date = this.date.bind(this);
         this.imageStyles = this.imageStyles.bind(this);
     }
@@ -26,6 +29,18 @@ class Post extends React.Component {
     componentDidMount() {
         const { fetchPost } = this.props;
         fetchPost({ ...this.props.location.state, id: this.props.match.params.id });
+        window.scrollTo(0, 0);
+    }
+
+    categoryList() {
+        const { categories } = this.props;
+        const categoryList = categories && categories.toJS();
+        return categoryList && categoryList.map((category) => (
+            <CategoryIcon
+                category={category}
+                isLink
+            />
+        ));
     }
 
     date() {
@@ -48,6 +63,9 @@ class Post extends React.Component {
             <section className="section">
                 <div className="container">
                     <article>
+                        <div className={styles.categoryListWrapper}>
+                            { this.categoryList() }
+                        </div>
                         <h2 className={styles.title} >
                             {title}
                         </h2>
@@ -64,7 +82,7 @@ class Post extends React.Component {
                         </h4>
                         <div style={this.imageStyles()} className={styles.image} ></div>
                         <div className={styles.body}>
-                            {body}
+                            <ReactMarkdown source={body} />
                         </div>
                     </article>
                 </div>
@@ -78,6 +96,7 @@ Post.propTypes = {
     subtitle: PropTypes.string,
     body: PropTypes.string,
     image: PropTypes.string,
+    categories: PropTypes.object,
     author: PropTypes.object,
     fetchPost: PropTypes.func,
 };
@@ -87,6 +106,7 @@ const mapStateToProps = (state, ownProps) => createStructuredSelector({
     subtitle: selectSubtitle(),
     body: selectBody(),
     image: selectImage(),
+    categories: selectCategories(),
     author: selectAuthor(),
     createdAt: selectCreatedAt(),
 });

@@ -1,3 +1,7 @@
+:root {
+    --navbar-border-width: 8px;
+}
+
 nav.navbar {
     background-color: transparent;
 }
@@ -9,19 +13,21 @@ nav.navbar {
 }
 
 .navbar-brand a.navbar-item {
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
-.navbar-item > a {
+.navbar-item a {
     color: #4a4a4a;
+    border-bottom: var(--navbar-border-width) solid transparent;
+    transition: border-bottom-color 0.085s linear;
 }
 
 .navbar-item:last-of-type {
     padding-right: 5.25rem;
 }
 
-.navbar-menu.is-active .navbar-item {
-    padding-left: 2.25rem;
+.navbar-end:hover a:hover {
+    border-bottom: var(--navbar-border-width) solid #b5fcff;
 }
 
 .navbar-burger.burger {

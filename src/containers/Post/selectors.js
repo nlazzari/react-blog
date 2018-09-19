@@ -40,6 +40,13 @@ const selectImage = () => createSelector(
     }
 );
 
+const selectCategories = () => createSelector(
+    selectPostData(),
+    (substate) => {
+        return substate && substate.get('categories');
+    }
+);
+
 const selectAuthor = () => createSelector(
     selectPostData(),
     (substate) => {
@@ -61,5 +68,6 @@ export {
     selectBody,
     selectImage,
     selectAuthor,
+    selectCategories,
     selectCreatedAt,
 };

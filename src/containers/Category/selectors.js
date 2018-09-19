@@ -1,24 +1,24 @@
 import { createSelector } from 'reselect';
 
-const selectHomeDomain = () => (state) => {
-    return state.get('Home');
+const selectCategoryDomain = () => (state) => {
+    return state.get('Category');
 };
 
-const selectHomePosts = () => createSelector(
-    selectHomeDomain(),
+const selectCategoryPosts = () => createSelector(
+    selectCategoryDomain(),
     (substate) => {
         return substate.get('posts');
     }
 );
 
 const selectLoading = () => createSelector(
-    selectHomeDomain(),
+    selectCategoryDomain(),
     (substate) => {
         return substate.get('loading');
     }
 );
 
 export {
-    selectHomePosts,
+    selectCategoryPosts,
     selectLoading,
 };

@@ -4,8 +4,10 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { fetchPostsRequest } from './actions';
-import { selectHomePosts } from './selectors';
+import { selectHomePosts, selectLoading } from './selectors';
 import PostSummary from '../../components/PostSummary';
+import PostSummaryList from '../../components/PostSummaryList';
+import LoadingOverlay from '../../components/LoadingOverlay';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
@@ -62,7 +64,7 @@ class Home extends React.Component {
     }
 
     postSummary(post, isFeature = false) {
-        const { id, title, subtitle, image, slug, author, created_at } = post;
+        const { id, title, subtitle, image, slug, categories, author, created_at } = post;
         const { history } = this.props;
         return (
             <PostSummary
@@ -71,6 +73,7 @@ class Home extends React.Component {
                 subtitle={subtitle}
                 image={image}
                 slug={slug}
+                categories={categories}
                 author={author}
                 createdAt={created_at}
                 isFeature={isFeature}
@@ -80,7 +83,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const { posts } = this.props;
+        const { posts, loading, history } = this.props;
         const {
             featurePost,
             firstRowPosts,
@@ -89,35 +92,30 @@ class Home extends React.Component {
         } = this.organizePostsByType(posts);
 
         return (<React.Fragment>
+            <LoadingOverlay loading={loading} />
             {featurePost ?
                 (<section className={classnames('section', styles.section)}>
                     <div className="container" key={`feature-post-key-${featurePost.id}`}>
                         { this.postSummary(featurePost, true) }
                     </div>
                 </section>) : null}
-            { this.gridRow(firstRowPosts) }
-            { this.gridRow(secondRowPosts) }
-            <section className="section">
-                <div className="container">
-                    {remainingPosts.map((post) => (
-                       <React.Fragment key={`remaining-post-key-${post.id}`}>
-                            {this.postSummary(post)}
-                       </React.Fragment>))
-                    }
-                </div>
-            </section>
+            { firstRowPosts ? this.gridRow(firstRowPosts) : null }
+            { secondRowPosts ? this.gridRow(secondRowPosts) : null }
+            { remainingPosts ? (<PostSummaryList postSummaries={remainingPosts} history={history} />) : null }
         </React.Fragment>
         );
     }
 }
 
 Home.propTypes = {
-    posts: PropTypes.object,
+    posts: PropTypes.array,
+    loading: PropTypes.bool,
     fetchPosts: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) => createStructuredSelector({
     posts: selectHomePosts(),
+    loading: selectLoading(),
 });
 
 const mapDispatchToProps = (dispatch) => {

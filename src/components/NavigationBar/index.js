@@ -30,7 +30,7 @@ export default class NavigationBar extends React.Component {
         <NavbarBrand>
             <NavbarItem>
                 <Link to='/'>
-                    ADT
+                    React-Blog
                 </Link>
             </NavbarItem>
             <NavbarBurger isActive={this.state.isActive} onClick={this.handleOnClickNav} />
@@ -38,8 +38,18 @@ export default class NavigationBar extends React.Component {
         <NavbarMenu isActive={this.state.isActive} onClick={this.handleOnClickNav}>
         <NavbarEnd>
             <NavbarItem>
-                <Link to="/">
-                    Page
+                <Link to="/category/homes">
+                    Homes
+                </Link>
+            </NavbarItem>
+            <NavbarItem>
+                <Link to="/category/interiors">
+                    Interiors
+                </Link>
+            </NavbarItem>
+            <NavbarItem>
+                <Link to="/category/travel">
+                    Travel
                 </Link>
             </NavbarItem>
         </NavbarEnd>

@@ -10,8 +10,8 @@ export default class PostSummary extends React.Component {
     }
 
     handleClick() {
-        const { history, id, title, subtitle, image, slug, author, createdAt } = this.props;
-        const state = { id, title, subtitle, image, slug, author, createdAt };
+        const { history, id, title, subtitle, image, slug, categories, author, createdAt } = this.props;
+        const state = { id, title, subtitle, image, slug, categories, author, createdAt };
         history.push(`/post/${id}/${slug}`, state);
     }
 
@@ -53,5 +53,9 @@ PostSummary.propTypes = {
     title: PropTypes.string,
     subtitle: PropTypes.string,
     image: PropTypes.string,
+    slug: PropTypes.string,
+    categories: PropTypes.array,
+    author: PropTypes.object,
+    createdAt: PropTypes.string,
     isFeature: PropTypes.bool,
 };

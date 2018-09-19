@@ -13,13 +13,21 @@
     font-weight: 200;
 }
 
+.body p + p:first-letter {
+    padding-left: 20px;
+}
+
+.body p ~ p {
+    margin-top: 20px;
+}
+
 .body:first-letter {
   color: #38ccd2;
   float: left;
   font-family: Georgia;
-  font-size: 5rem;
+  font-size: 4rem;
   line-height: 4rem;
-  margin-top: 0.85rem;
+  margin-top: 0.3rem;
   padding-right: 1.5rem;
   padding-left: 0.25rem;
 }
@@ -32,6 +40,10 @@
 .subtitle {
     font-size: 1.0rem;
     font-weight: 100;
+    margin-bottom: 20px;
+}
+
+.categoryListWrapper {
     margin-bottom: 20px;
 }
 
@@ -59,5 +71,10 @@
     .body {
       padding: 0 80px;
       margin: calc(1.5rem + 40.0px) 0;
+    }
+
+    .body:first-letter {
+      font-size: 5rem;
+      margin-top: 0.85rem;
     }
 }
